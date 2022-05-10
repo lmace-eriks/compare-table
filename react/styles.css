@@ -2,55 +2,21 @@ html {
     scroll-behavior: smooth;
 }
 
-nav * {
-    user-select: none;
-}
-
-.glossaryContainer {
+.tableContainer {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
-    height: 80vh;
 }
 
-.glossaryColumnOne, .glossaryColumnTwo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 30%;
-    height: 100%;
+table, th, td {
+    border: 1px solid black;
 }
 
-.colOneContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
+table {
+    width: 100%;
 }
 
-.colTwoContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 90%;
-}
-
-.glossaryColumnOne {}
-
-.glossaryColumnTwo {}
-
-.letter {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.5rem;
-    cursor: pointer;
-    width: 2rem;
-    height: 2rem;
-
-    transition: font-size 100ms linear;
-}
-
-.letter:hover {
-    font-size: 2.5rem;
+.feature {
+    font-weight: bold;
 }
