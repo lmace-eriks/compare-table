@@ -1,0 +1,6 @@
+{
+  "comparetable": {
+    "component": "CompareTable",
+    "composition": "children"
+  }
+}
