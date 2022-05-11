@@ -30,6 +30,8 @@ const CompareTable: StorefrontFunctionComponent<CompareTableProps> = ({ tableDat
   const [thWidth, setThWidth] = useState<number>(0);
   const [featureValues, setFeatureValues] = useState<Array<any>>([]);
 
+  const classPrefix = "eriksbikeshop-comparetable-1-x-";
+
   useEffect(() => {
     if (!openGate) return;
     console.clear();
@@ -48,20 +50,50 @@ const CompareTable: StorefrontFunctionComponent<CompareTableProps> = ({ tableDat
     setOpenGate(false);
   })
 
+  const handleHighlight = (e: any) => {
+    const activeCell: string = e.target.id;
+    const activeRow: Number = Number(activeCell.split("row-")[1].split("-cell")[0]);
+    const activeCol: Number = Number(activeCell.split("-cell-")[1]);
+
+    // @ts-expect-error
+    const redRow: any = document.getElementById(`row-${activeRow}`);
+    redRow.classList.add(classPrefix + "redBackground");
+
+    // @ts-expect-error
+    const redCol: any = document.getElementById(`col-${activeCol}`);
+    redCol.classList.add(classPrefix + "redBackground");
+  }
+
+  const handleDim = (e: any) => {
+    const activeCell: string = e.target.id;
+    const activeRow: Number = Number(activeCell.split("row-")[1].split("-cell")[0]);
+    const activeCol: Number = Number(activeCell.split("-cell-")[1]);
+
+    // @ts-expect-error
+    const redRow: any = document.getElementById(`row-${activeRow}`);
+    redRow.classList.remove(classPrefix + "redBackground");
+
+    // @ts-expect-error
+    const redCol: any = document.getElementById(`col-${activeCol}`);
+    redCol.classList.remove(classPrefix + "redBackground");
+  }
+
+  // When rolling over cell, Feature and Bike cells should highlight
+
   return (
     <div className={styles.tableContainer}>
       <table>
         <tr>
           <th style={{ width: `${thWidth}%` }} className={styles.noBorder}></th>
-          {allProducts.map(product => (
-            <th style={{ width: `${thWidth}%` }}>{product.title}</th>
+          {allProducts.map((product, index) => (
+            <th id={`col-${index}`} style={{ width: `${thWidth}%` }}>{product.title}</th>
           ))}
         </tr>
         {featureTitles.map((feature, index) => (
           <tr>
-            <td className={styles.featureTitle}>{feature}</td>
-            {featureData.map(data => (
-              <td>{data[index].value}</td>
+            <td id={`row-${index}`} className={styles.featureTitle}>{feature}</td>
+            {featureData.map((data, featureIndex) => (
+              <td id={`row-${index}-cell-${featureIndex}`} onMouseOver={handleHighlight} onMouseOut={handleDim}>{data[index].value}</td>
             ))}
           </tr>
         ))}
