@@ -9,9 +9,7 @@ interface CompareTableProps {
 }
 
 interface TableDataObject {
-  title: string
   products: Array<ProductObject>
-
 }
 
 interface ProductObject {
@@ -26,7 +24,6 @@ interface FeatureObject {
 
 const CompareTable: StorefrontFunctionComponent<CompareTableProps> = ({ tableData }) => {
   const [openGate, setOpenGate] = useState<Boolean>(true);
-  const [tableTitle, setTableTitle] = useState<string>("");
   const [featureTitles, setFeatureTitles] = useState<Array<string>>([]);
   const [allProducts, setAllProducts] = useState<Array<ProductObject>>([]);
   const [featureData, setFeatureData] = useState<Array<any>>([]);
@@ -41,44 +38,34 @@ const CompareTable: StorefrontFunctionComponent<CompareTableProps> = ({ tableDat
     tableData.products[0].features.forEach(feature => featureTitleTemp.push(feature.feature));
 
     const featureValuesTemp: Array<Array<FeatureObject>> = [];
-    tableData.products.forEach((product) => {
-      featureValuesTemp.push(product.features);
-    });
+    tableData.products.forEach((product) => featureValuesTemp.push(product.features));
 
 
     setFeatureData(featureValuesTemp);
-    console.log(featureValuesTemp)
-    setTableTitle(tableData.title);
     setFeatureTitles(featureTitleTemp);
     setAllProducts(tableData.products);
-    setOpenGate(false);
     setThWidth(100 / (tableData.products.length + 1));
+    setOpenGate(false);
   })
-
-  const handleClick = () => {
-    console.log(featureData)
-  }
 
   return (
     <div className={styles.tableContainer}>
-      {tableTitle}
       <table>
         <tr>
-          <th style={{ width: `${thWidth}%` }}></th>
+          <th style={{ width: `${thWidth}%` }} className={styles.noBorder}></th>
           {allProducts.map(product => (
             <th style={{ width: `${thWidth}%` }}>{product.title}</th>
           ))}
         </tr>
         {featureTitles.map((feature, index) => (
           <tr>
-            <td>{feature}</td>
+            <td className={styles.featureTitle}>{feature}</td>
             {featureData.map(data => (
               <td>{data[index].value}</td>
             ))}
           </tr>
         ))}
       </table>
-      <button onClick={handleClick}>View</button>
     </div>
   )
 }

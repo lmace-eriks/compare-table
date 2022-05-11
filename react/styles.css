@@ -9,14 +9,40 @@ html {
     width: 100%;
 }
 
-table, th, td {
+tr:nth-child(even) {
+    background-color: rgb(240, 240, 240);
+}
+
+th, .featureTitle {
+    font-size: 0.9rem;
+    padding: 0.25rem;
+}
+
+th, td {
     border: 1px solid black;
+}
+
+td {
+    text-align: center;
+    font-size: 0.8rem;
+}
+
+td:hover:not(.featureTitle) {
+    background-color: rgb(210, 210, 210);
 }
 
 table {
     width: 100%;
+    border-collapse: collapse;
+    cursor: default;
 }
 
-.feature {
+.noBorder {
+    border-top: none;
+    border-left: none;
+}
+
+.featureTitle {
     font-weight: bold;
+    height: 2.5rem;
 }
