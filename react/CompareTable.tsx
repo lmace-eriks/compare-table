@@ -22,15 +22,20 @@ interface FeatureObject {
   value: string
 }
 
+interface HighlightObject {
+  activeRow: Number
+  activeCol: Number
+}
+
 const CompareTable: StorefrontFunctionComponent<CompareTableProps> = ({ tableData }) => {
   const [openGate, setOpenGate] = useState<Boolean>(true);
   const [featureTitles, setFeatureTitles] = useState<Array<string>>([]);
   const [allProducts, setAllProducts] = useState<Array<ProductObject>>([]);
   const [featureData, setFeatureData] = useState<Array<any>>([]);
   const [thWidth, setThWidth] = useState<number>(0);
-  const [featureValues, setFeatureValues] = useState<Array<any>>([]);
 
-  const classPrefix = "eriksbikeshop-comparetable-1-x-";
+  const classPrefix: string = "eriksbikeshop-comparetable-1-x-";
+  const hightlightClassName: string = "redBackground"
 
   useEffect(() => {
     if (!openGate) return;
@@ -42,7 +47,6 @@ const CompareTable: StorefrontFunctionComponent<CompareTableProps> = ({ tableDat
     const featureValuesTemp: Array<Array<FeatureObject>> = [];
     tableData.products.forEach((product) => featureValuesTemp.push(product.features));
 
-
     setFeatureData(featureValuesTemp);
     setFeatureTitles(featureTitleTemp);
     setAllProducts(tableData.products);
@@ -51,34 +55,31 @@ const CompareTable: StorefrontFunctionComponent<CompareTableProps> = ({ tableDat
   })
 
   const handleHighlight = (e: any) => {
-    const activeCell: string = e.target.id;
-    const activeRow: Number = Number(activeCell.split("row-")[1].split("-cell")[0]);
-    const activeCol: Number = Number(activeCell.split("-cell-")[1]);
-
-    // @ts-expect-error
-    const redRow: any = document.getElementById(`row-${activeRow}`);
-    redRow.classList.add(classPrefix + "redBackground");
-
-    // @ts-expect-error
-    const redCol: any = document.getElementById(`col-${activeCol}`);
-    redCol.classList.add(classPrefix + "redBackground");
+    toggleHighlight(true, grabActive(e.target.id));
   }
 
   const handleDim = (e: any) => {
-    const activeCell: string = e.target.id;
+    toggleHighlight(false, grabActive(e.target.id));
+  }
+
+  const grabActive = (activeCell: string) => {
     const activeRow: Number = Number(activeCell.split("row-")[1].split("-cell")[0]);
     const activeCol: Number = Number(activeCell.split("-cell-")[1]);
+    return { activeRow, activeCol };
+  }
+
+  const toggleHighlight = (light: Boolean, info: HighlightObject) => {
+    const { activeRow, activeCol } = info;
 
     // @ts-expect-error
     const redRow: any = document.getElementById(`row-${activeRow}`);
-    redRow.classList.remove(classPrefix + "redBackground");
 
     // @ts-expect-error
     const redCol: any = document.getElementById(`col-${activeCol}`);
-    redCol.classList.remove(classPrefix + "redBackground");
-  }
 
-  // When rolling over cell, Feature and Bike cells should highlight
+    light ? redRow.classList.add(classPrefix + hightlightClassName) : redRow.classList.remove(classPrefix + hightlightClassName);
+    light ? redCol.classList.add(classPrefix + hightlightClassName) : redCol.classList.remove(classPrefix + hightlightClassName);
+  }
 
   return (
     <div className={styles.tableContainer}>
