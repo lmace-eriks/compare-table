@@ -13,7 +13,7 @@ html {
     box-sizing: border-box;
 }
 
-tr:nth-child(even) {
+tr:nth-child(odd) {
     background-color: rgb(240, 240, 240);
 }
 
@@ -26,12 +26,17 @@ th, td {
     border: 1px solid black;
 }
 
+.shopButtonCell, .noBorderShop {
+    border: none;
+}
+
 td {
     text-align: center;
     font-size: 1rem;
+    padding: 0 0.25rem;
 }
 
-td:hover:not(.featureTitle, .noBorderShop, .shopButtonCell) {
+td:hover:not(.featureTitle, .noBorderShop, .shopButtonCell, .noBorderImageCell) {
     background-color: rgb(210, 210, 210);
 }
 
@@ -41,7 +46,7 @@ table {
     cursor: default;
 }
 
-.noBorder {
+.noBorderTh {
     border-top: none;
     border-left: none;
 }
@@ -51,24 +56,76 @@ table {
     height: 2.5rem;
 }
 
-.redBackground {
-    background-color: #ee2d25;
-    color: white;
-}
-
-.noBorderShop {
-    border-left: none;
-    border-bottom: none;
-}
-
 .shopButtonCell {
     height: 3rem;
 }
 
 .shopNowTableButton {
+    display: block;
     background-color: #ee2d25;
     color: white;
     font-weight: bold;
     text-decoration: none;
     padding: 0.25rem;
+}
+
+.noBorderImageCell {
+    border: none;
+    background-color: white;
+    padding: 0 1rem;
+}
+
+/* Desktop Rules - LM */
+@media (min-width: 1026px) {}
+
+/* Mobile Rules - LM */
+@media (max-width: 1025px) {
+    th, td, .featureTitle, .shopNowTableButton {
+        font-size: 0.9rem;
+    }
+
+    .noBorderImageCell img {
+        object-fit: contain;
+    }
+
+    .tableContainer {
+        overflow: auto;
+        position: relative;
+    }
+
+    table {
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+
+    .featureTitle {
+        position: sticky;
+        left: 0;
+        padding: 0;
+    }
+
+    .featureTitle span {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-right: 1px solid black;
+        border-bottom: 1px solid black;
+        padding: 0 0.25rem;
+        width: 100%;
+        height: 100%;
+    }
+
+    tr:nth-child(odd) .featureTitle {
+        background-color: rgb(240, 240, 240);
+    }
+
+    tr:nth-child(even) .featureTitle {
+        background-color: white;
+    }
+}
+
+.redBackground {
+    background-color: #ee2d25 !important;
+    color: white;
 }
