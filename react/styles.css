@@ -9,6 +9,10 @@ html {
     width: 100%;
 }
 
+.tableContainer * {
+    box-sizing: border-box;
+}
+
 tr:nth-child(even) {
     background-color: rgb(240, 240, 240);
 }
@@ -27,7 +31,7 @@ td {
     font-size: 1rem;
 }
 
-td:hover:not(.featureTitle) {
+td:hover:not(.featureTitle, .noBorderShop, .shopButtonCell) {
     background-color: rgb(210, 210, 210);
 }
 
@@ -50,4 +54,21 @@ table {
 .redBackground {
     background-color: #ee2d25;
     color: white;
+}
+
+.noBorderShop {
+    border-left: none;
+    border-bottom: none;
+}
+
+.shopButtonCell {
+    height: 3rem;
+}
+
+.shopNowTableButton {
+    background-color: #ee2d25;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 0.25rem;
 }
