@@ -1,4 +1,3 @@
-import { forEach } from 'ramda';
 import React, { useEffect, useState } from 'react';
 
 // Styles
@@ -41,24 +40,27 @@ const CompareTable: StorefrontFunctionComponent<CompareTableProps> = ({ tableDat
 
   const classPrefix: string = "eriksbikeshop-comparetable-1-x-";
   const hightlightClassName: string = "redBackground"
+  const highlight: string = classPrefix + hightlightClassName;
   const rowHeight: number = 2.5;
   const imageHeight: number = 5;
 
   useEffect(() => {
     if (!openGate) return;
     console.clear();
+    console.log(Date.now());
 
     const featureTitleTemp: Array<string> = [];
+    const featureValuesTemp: Array<Array<FeatureObject>> = [];
+    const shopLinkTemp: Array<string> = [];
+    const productImagesTemp: Array<string> = [];
+
     tableData.products[0].features.forEach(feature => featureTitleTemp.push(feature.feature));
 
-    const featureValuesTemp: Array<Array<FeatureObject>> = [];
-    tableData.products.forEach(product => featureValuesTemp.push(product.features));
-
-    const shopLinkTemp: Array<string> = [];
-    tableData.products.forEach(shopLink => shopLinkTemp.push(shopLink.shopLink));
-
-    const productImagesTemp: Array<string> = [];
-    tableData.products.forEach(image => productImagesTemp.push(image.image));
+    tableData.products.forEach(product => {
+      featureValuesTemp.push(product.features);
+      shopLinkTemp.push(product.shopLink);
+      productImagesTemp.push(product.image);
+    });
 
     setFeatureData(featureValuesTemp);
     setFeatureTitles(featureTitleTemp);
@@ -77,12 +79,12 @@ const CompareTable: StorefrontFunctionComponent<CompareTableProps> = ({ tableDat
 
     // @ts-expect-error 
     const redCol: any = document.getElementById(`col-${activeCol}`);
-    light ? redCol.classList.add(classPrefix + hightlightClassName) : redCol.classList.remove(classPrefix + hightlightClassName);
+    light ? redCol.classList.add(highlight) : redCol.classList.remove(highlight);
 
     if (activeRow < featureTitles.length) {
       // @ts-expect-error
       const redRow: any = document.getElementById(`row-${activeRow}`);
-      light ? redRow.classList.add(classPrefix + hightlightClassName) : redRow.classList.remove(classPrefix + hightlightClassName);
+      light ? redRow.classList.add(highlight) : redRow.classList.remove(highlight);
     }
   }
 

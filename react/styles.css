@@ -75,9 +75,6 @@ table {
     padding: 0 1rem;
 }
 
-/* Desktop Rules - LM */
-@media (min-width: 1026px) {}
-
 /* Mobile Rules - LM */
 @media (max-width: 1025px) {
     th, td, .featureTitle, .shopNowTableButton {
