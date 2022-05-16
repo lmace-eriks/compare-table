@@ -1,7 +1,7 @@
 {
   "vendor": "eriksbikeshop",
   "name": "comparetable",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "title": "CompareTable",
   "description": "CompareTable component",
   "defaultLocale": "pt-BR",

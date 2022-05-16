@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 // Styles
 import styles from "./styles.css";
@@ -43,6 +43,7 @@ const CompareTable: StorefrontFunctionComponent<CompareTableProps> = ({ tableDat
   const highlight: string = classPrefix + hightlightClassName;
   const rowHeight: number = 2.5;
   const imageHeight: number = 5;
+  const scrollbarBuffer: number = 1.5;
 
   useEffect(() => {
     if (!openGate) return;
@@ -68,7 +69,7 @@ const CompareTable: StorefrontFunctionComponent<CompareTableProps> = ({ tableDat
     setProductImages(productImagesTemp);
     setShopLinks(shopLinkTemp);
     setThWidth(100 / (tableData.products.length + 1));
-    setTableContainerHeight((featureTitleTemp.length + 3) * rowHeight + imageHeight);
+    setTableContainerHeight(((featureTitleTemp.length + 3) * rowHeight + imageHeight) + scrollbarBuffer);
     setOpenGate(false);
   })
 
@@ -113,7 +114,7 @@ const CompareTable: StorefrontFunctionComponent<CompareTableProps> = ({ tableDat
         </tr>
         {featureTitles.map((feature, index) => (
           <tr key={`tr-${index}`}>
-            <td key={`row-${index}`} id={`row-${index}`} style={{ height: `${rowHeight}rem` }} className={styles.featureTitle}><span>{feature}</span></td>
+            <td key={`row-${index}`} id={`row-${index}`} style={{ height: `${rowHeight}rem` }} className={styles.featureTitle}>{feature}</td>
             {featureData.map((data, featureIndex) => (
               <td key={`row-${index}-cell-${featureIndex}`} id={`row-${index}-cell-${featureIndex}`} onMouseOver={handleToggle} onMouseOut={handleToggle}>{data[index].value}</td>
             ))}
