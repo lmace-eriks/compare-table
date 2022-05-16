@@ -97,8 +97,8 @@ const CompareTable: StorefrontFunctionComponent<CompareTableProps> = ({ tableDat
 
   return (
     <div style={{ height: `${tableContainerHeight}rem` }} className={styles.tableContainer}>
-      <table>
-        <tr>
+      <table className={styles.compareTable}>
+        <tr className={styles.track}>
           <td className={styles.noBorderImageCell}></td>
           {productImages.map(image => (
             <td key={`td-${image}`} className={styles.noBorderImageCell}>
@@ -106,21 +106,21 @@ const CompareTable: StorefrontFunctionComponent<CompareTableProps> = ({ tableDat
             </td>
           ))}
         </tr>
-        <tr>
+        <tr className={styles.track}>
           <th style={{ width: `${thWidth}%` }} className={styles.noBorderTh}></th>
           {allProducts.map((product, index) => (
-            <th key={`col-${index}`} id={`col-${index}`} style={{ width: `${thWidth}%`, height: `${rowHeight}rem` }}>{product.title}</th>
+            <th key={`col-${index}`} id={`col-${index}`} className={styles.tableHeader} style={{ width: `${thWidth}%`, height: `${rowHeight}rem` }}>{product.title}</th>
           ))}
         </tr>
         {featureTitles.map((feature, index) => (
-          <tr key={`tr-${index}`}>
+          <tr className={styles.track} key={`tr-${index}`}>
             <td key={`row-${index}`} id={`row-${index}`} style={{ height: `${rowHeight}rem` }} className={styles.featureTitle}>{feature}</td>
             {featureData.map((data, featureIndex) => (
-              <td key={`row-${index}-cell-${featureIndex}`} id={`row-${index}-cell-${featureIndex}`} onMouseOver={handleToggle} onMouseOut={handleToggle}>{data[index].value}</td>
+              <td key={`row-${index}-cell-${featureIndex}`} id={`row-${index}-cell-${featureIndex}`} onMouseOver={handleToggle} onMouseOut={handleToggle} className={styles.tableData}>{data[index].value}</td>
             ))}
           </tr>
         ))}
-        <tr>
+        <tr className={styles.track}>
           <td style={{ width: `${thWidth}%` }} className={styles.noBorderShop}></td>
           {shopLinks.map((shopLink, index) => (
             <td key={`row-${featureTitles.length}-cell-${index}`} className={styles.shopButtonCell}>

@@ -13,16 +13,16 @@ html {
     box-sizing: border-box;
 }
 
-tr:nth-child(odd) {
+.track:nth-child(odd) {
     background-color: rgb(240, 240, 240);
 }
 
-th, .featureTitle {
+.tableHeader, .featureTitle {
     font-size: 1.1rem;
     padding: 0.25rem;
 }
 
-th, td {
+.tableHeader, .tableData {
     border: 1px solid black;
 }
 
@@ -30,17 +30,17 @@ th, td {
     border: none;
 }
 
-td {
+.tableData {
     text-align: center;
     font-size: 1rem;
     padding: 0 0.25rem;
 }
 
-td:hover:not(.featureTitle, .noBorderShop, .shopButtonCell, .noBorderImageCell) {
+.tableData:hover {
     background-color: rgb(210, 210, 210);
 }
 
-table {
+.compareTable {
     width: 100%;
     border-collapse: collapse;
     cursor: default;
@@ -53,12 +53,14 @@ table {
 
 .featureTitle {
     font-weight: bold;
+    text-align: center;
     height: 2.5rem;
     padding: 0.25rem;
 }
 
 .shopButtonCell {
     height: 3rem;
+    padding: 0 0.25rem;
 }
 
 .shopNowTableButton {
@@ -68,6 +70,7 @@ table {
     font-weight: bold;
     text-decoration: none;
     padding: 0.25rem;
+    text-align: center;
 }
 
 .noBorderImageCell {
@@ -78,7 +81,7 @@ table {
 
 /* Mobile Rules - LM */
 @media (max-width: 1025px) {
-    th, td, .featureTitle, .shopNowTableButton {
+    .tableHeader, .tableData, .featureTitle, .shopNowTableButton {
         font-size: 0.9rem;
     }
 
@@ -91,7 +94,7 @@ table {
         position: relative;
     }
 
-    table {
+    .compareTable {
         position: absolute;
         left: 0;
         top: 0;
@@ -114,11 +117,11 @@ table {
         padding: 0.25rem;
     }
 
-    tr:nth-child(odd) .featureTitle {
+    .track:nth-child(odd) .featureTitle {
         background-color: rgb(240, 240, 240);
     }
 
-    tr:nth-child(even) .featureTitle {
+    .track:nth-child(even) .featureTitle {
         background-color: white;
     }
 }
