@@ -38,6 +38,8 @@ const CompareTable: StorefrontFunctionComponent<CompareTableProps> = ({ tableDat
   const [thWidth, setThWidth] = useState<number>(0);
   const [tableContainerHeight, setTableContainerHeight] = useState<Number>(0);
 
+  const tableRef = useRef<any>(null);
+
   const classPrefix: string = "eriksbikeshop-comparetable-1-x-";
   const hightlightClassName: string = "redBackground"
   const highlight: string = classPrefix + hightlightClassName;
@@ -47,8 +49,7 @@ const CompareTable: StorefrontFunctionComponent<CompareTableProps> = ({ tableDat
 
   useEffect(() => {
     if (!openGate) return;
-    console.clear();
-    console.log(Date.now());
+    // console.clear();
 
     const featureTitleTemp: Array<string> = [];
     const featureValuesTemp: Array<Array<FeatureObject>> = [];
@@ -69,9 +70,16 @@ const CompareTable: StorefrontFunctionComponent<CompareTableProps> = ({ tableDat
     setProductImages(productImagesTemp);
     setShopLinks(shopLinkTemp);
     setThWidth(100 / (tableData.products.length + 1));
-    setTableContainerHeight(((featureTitleTemp.length + 3) * rowHeight + imageHeight) + scrollbarBuffer);
+    // setTableContainerHeight(((featureTitleTemp.length + 3) * rowHeight + imageHeight) + scrollbarBuffer);
     setOpenGate(false);
+    setAppHeight();
   })
+
+  const setAppHeight = () => {
+    setTimeout(() => {
+      setTableContainerHeight(tableRef.current.clientHeight);
+    }, 250)
+  }
 
   const handleToggle = (e: any) => {
     const light = e.type === "mouseover";
@@ -96,13 +104,13 @@ const CompareTable: StorefrontFunctionComponent<CompareTableProps> = ({ tableDat
   }
 
   return (
-    <div style={{ height: `${tableContainerHeight}rem` }} className={styles.tableContainer}>
-      <table className={styles.compareTable}>
+    <div style={{ height: `${tableContainerHeight}px` }} className={styles.tableContainer}>
+      <table ref={tableRef} className={styles.compareTable}>
         <tr className={styles.track}>
           <td className={styles.noBorderImageCell}></td>
           {productImages.map(image => (
             <td key={`td-${image}`} className={styles.noBorderImageCell}>
-              <img key={`image-${image}`} src={image} style={{ height: `${imageHeight}rem` }} />
+              <img key={`image-${image}`} src={image} className={styles.productImage} style={{ height: `${imageHeight}rem` }} />
             </td>
           ))}
         </tr>

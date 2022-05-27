@@ -13,6 +13,10 @@ html {
     box-sizing: border-box;
 }
 
+.productImage {
+    object-fit: contain;
+}
+
 .track:nth-child(odd) {
     background-color: rgb(240, 240, 240);
 }
