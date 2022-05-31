@@ -2,11 +2,15 @@ html {
     scroll-behavior: smooth;
 }
 
-.tableContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
+/* Desktop Rules - LM */
+@media (min-width: 1026px) {
+    .tableContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        height: auto !important;
+    }
 }
 
 .tableContainer * {
@@ -82,6 +86,8 @@ html {
     background-color: white;
     padding: 0 1rem;
 }
+
+
 
 /* Mobile Rules - LM */
 @media (max-width: 1025px) {

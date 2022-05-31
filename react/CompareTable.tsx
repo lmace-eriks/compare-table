@@ -78,7 +78,7 @@ const CompareTable: StorefrontFunctionComponent<CompareTableProps> = ({ tableDat
   const setAppHeight = () => {
     setTimeout(() => {
       setTableContainerHeight(tableRef.current.clientHeight);
-    }, 250)
+    }, 1000)
   }
 
   const handleToggle = (e: any) => {
